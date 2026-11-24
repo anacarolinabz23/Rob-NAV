@@ -1,6 +1,6 @@
 /**
   Robô NAV
-  @authors Murilo Aguiar Cabral, Felipe, Guilherme, João Gustavo, Ana Carolina, Victor
+  @authors Ana Carolina Barboza da Silva
   @version 1.0
   @link https://github.com/aguiarcabralmurilo-debug/robo-nav
 */
@@ -11,15 +11,15 @@
 // LED indicador
 #define led 13 // led indicador
 // Motores
-#define M1A 5 // Motor esquerda
-#define M1B 6 // Motor esquerda
+#define M1A 6 // Motor esquerda
+#define M1B 5 // Motor esquerda
 #define M2A 9 // Motor direita
 #define M2B 10 // Motor direita
-
+ 
 //Variáveis para ajuste de velocidade
 int velM1 = 150; // velocidade do motor M1 (0 a 150)
 int velM2 = 150; // velocidade do motor M2 (0 a 150)
-
+ 
 void setup() {
   pinMode(led, OUTPUT);  // Led provisório
   pinMode(trig, OUTPUT); //Sensor
@@ -44,6 +44,8 @@ void loop() {
     delay(1000); // ficar parado por 1s.
     direita(); // girar sentido horário
     delay(300); // por 300ms
+    re();
+    delay(200);
   } else {
     digitalWrite(led, LOW);
     frente();
@@ -68,7 +70,7 @@ int ping() {
   //retorna o valor da distância em cm
   return distancia;
 }
-
+ 
 //função para mover o robô para frente
 void frente() {
   analogWrite(M1A, velM1);
@@ -76,7 +78,7 @@ void frente() {
   analogWrite(M2A, velM2);
   analogWrite(M2B, 0);
 }
-
+ 
 // função para mover o robô de ré
 void re(){
   analogWrite(M1B, velM1);
@@ -84,7 +86,7 @@ void re(){
   analogWrite(M2B, velM2);
   analogWrite(M2A, 0);
 }
-
+ 
 // função para virar o robô no sentido horário (direita)
 void direita(){
   analogWrite(M1B, velM1);
@@ -92,7 +94,7 @@ void direita(){
   analogWrite(M2A, velM2);
   analogWrite(M2B, 0);
 }
-
+ 
 // função para virar o robô no sentido anti-horário (esquerda)
 void esquerda(){
   analogWrite(M1A, velM1);
@@ -100,12 +102,12 @@ void esquerda(){
   analogWrite(M2B, velM2);
   analogWrite(M2A, 0);
 }
-
+ 
 //função parar o robô
 void parar() {
   analogWrite(M1A, 0);
   analogWrite(M1B, 0);
   analogWrite(M2A, 0);
   analogWrite(M2B, 0);
-  
+ 
 }
